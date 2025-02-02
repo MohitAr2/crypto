@@ -7,13 +7,14 @@ from ciphers.Rail_Fence import encrypt_rail_fence
 from ciphers.Row_Column_transposition import encrypt_row_column_transposition
 from ciphers.Vernam import encrypt_vernam
 from ciphers.Vignere import encrypt_vignere
+from ciphers.DES import encrypt_DES
 
 def start_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect(('127.0.0.1', 8080))
     print("Connected to the server")
     while True:
-        mess = input("Plain text: ")
+        mess = input("Plain text (if in DES give hexadecimal of size 16) for example \"123456ABCD132536\" : ")
         print("Choose type of encryption:")
         print("0 for PlayFair")
         print("1 for Hill")
@@ -22,6 +23,7 @@ def start_client():
         print("4 for Vernam")
         print("5 for Vigenere")
         print("6 for Caesar")
+        print("7 for DES")
         a = int(input("Enter your choice: "))
         
         
@@ -62,6 +64,10 @@ def start_client():
             shift = int(k)
             message = encrypt_caesar(mess, shift)
             print("Caesar encryption selected.")
+        elif a==7:
+            k = input("Key should be given (as a string but hexadecimal value of size 16 ) -> \"ABCDEFABCDEF1233\" : ")
+            message = encrypt_DES(mess,k,False)
+            print("DES encryption selected.")
         else:
             k = input("Enter the key but there is an error now wont matter this is to handle the empty send signal of client")
             print("Invalid choice.")

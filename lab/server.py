@@ -7,6 +7,7 @@ from ciphers.Rail_Fence import decrypt_rail_fence
 from ciphers.Row_Column_transposition import decrypt_row_column_transposition
 from ciphers.Vernam import decrypt_vernam
 from ciphers.Vignere import decrypt_vignere
+from ciphers.DES import decrypt_DES
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -50,6 +51,9 @@ def start_server():
             shift = int(k)
             fin = decrypt_caesar(message, shift)
             print("Caesar decryption selected.")
+        elif a == '7':  # DES
+            fin = decrypt_DES(message, k)
+            print("DES decryption selected.")
         else:
             fin = "Invalid encryption type."
             print("Invalid decryption type selected.")
