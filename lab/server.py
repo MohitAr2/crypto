@@ -8,6 +8,7 @@ from ciphers.Row_Column_transposition import decrypt_row_column_transposition
 from ciphers.Vernam import decrypt_vernam
 from ciphers.Vignere import decrypt_vignere
 from ciphers.DES import decrypt_DES
+from ciphers.AES import decrypt_AES
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -54,6 +55,10 @@ def start_server():
         elif a == '7':  # DES
             fin = decrypt_DES(message, k)
             print("DES decryption selected.")
+        elif a == '8':
+            fin = decrypt_AES(message,k)
+            print("AES decryption selected.")
+            # has errors here inverse logic mistakes there cant fig out where ?
         else:
             fin = "Invalid encryption type."
             print("Invalid decryption type selected.")
@@ -67,3 +72,4 @@ def start_server():
 
 if __name__ == "__main__":
     start_server()
+
